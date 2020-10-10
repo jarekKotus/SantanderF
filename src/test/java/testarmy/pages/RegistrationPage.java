@@ -1,15 +1,16 @@
-package Pages;
+package testarmy.pages;
 
 import com.github.javafaker.Faker;
-import cucumber.api.java.eo.Se;
+import io.cucumber.spring.ScenarioScope;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
+import org.springframework.stereotype.Component;
+import testarmy.utils.DriverProvider;
 
-import static Data.TestData.BASEURL;
-
+@Component
+@ScenarioScope
 public class RegistrationPage extends BasePage {
-
 
     @FindBy(css = "#id_gender1")
     WebElement mrGender;
@@ -58,8 +59,8 @@ public class RegistrationPage extends BasePage {
 
     Faker faker = new Faker();
 
-    public RegistrationPage() {
-        super();
+    public RegistrationPage(DriverProvider driverProvider) {
+        super(driverProvider);
     }
 
     public RegistrationPage fillUpRegistrationFrom() {

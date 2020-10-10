@@ -1,13 +1,16 @@
-package Pages;
+package testarmy.pages;
 
 import com.github.javafaker.Faker;
+import io.cucumber.spring.ScenarioScope;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import testarmy.utils.DriverProvider;
 
-import static Data.TestData.BASEURL;
-
+@Component
+@ScenarioScope
 public class LoginPage extends BasePage {
-
 
     @FindBy(css = "#email_create")
     WebElement createEmailInput;
@@ -17,8 +20,8 @@ public class LoginPage extends BasePage {
 
     Faker faker = new Faker();
 
-    public LoginPage() {
-        super();
+    public LoginPage(DriverProvider driverProvider) {
+        super(driverProvider);
     }
 
     private LoginPage insertEmailCreate() {

@@ -1,25 +1,30 @@
-package Pages;
+package testarmy.pages;
 
-import gherkin.Main;
-import org.openqa.selenium.WebDriver;
+import io.cucumber.spring.ScenarioScope;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import testarmy.utils.DriverProvider;
 
-import static Data.TestData.BASEURL;
+import static testarmy.data.TestData.BASEURL;
 
+@Component
+@ScenarioScope
 public class MainPage extends BasePage {
 
+    @Autowired
+    private DriverProvider driverProvider;
 
     @FindBy(css = ".header_user_info a")
     WebElement signIn;
 
-    public MainPage() {
-        super();
+    public MainPage(DriverProvider driverProvider) {
+        super(driverProvider);
     }
 
     private MainPage openMainPage() {
-        driver.get(BASEURL);
+        driverProvider.getDriver().get(BASEURL);
         return this;
     }
 
