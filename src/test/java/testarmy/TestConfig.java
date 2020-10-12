@@ -6,12 +6,14 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import testarmy.utils.DriverProvider;
 
+import java.net.MalformedURLException;
+
 @Configuration
 @ComponentScan(basePackages = "testarmy")
 public class TestConfig {
 
     @Bean
-    public DriverProvider driverProvider() {
+    public DriverProvider driverProvider() throws MalformedURLException {
         return new DriverProvider();
     }
 }

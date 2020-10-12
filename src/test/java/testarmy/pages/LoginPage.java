@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import testarmy.utils.DriverProvider;
 
+import static testarmy.data.TestData.LOGIN;
+import static testarmy.data.TestData.PASSWORD;
+
 @Component
 @ScenarioScope
 public class LoginPage extends BasePage {
@@ -18,6 +21,15 @@ public class LoginPage extends BasePage {
     @FindBy(css = "#SubmitCreate")
     WebElement createAccountBtn;
 
+    @FindBy(css = "#email")
+    WebElement loginEmailInput;
+
+    @FindBy(css = "#passwd")
+    WebElement passwordEmailInput;
+
+    @FindBy(css = "#SubmitLogin")
+    WebElement signInButton;
+
     Faker faker = new Faker();
 
     public LoginPage(DriverProvider driverProvider) {
@@ -25,17 +37,27 @@ public class LoginPage extends BasePage {
     }
 
     private LoginPage insertEmailCreate() {
-        sendKeysToVisivleElement(createEmailInput, "jaroslaw.kotus+"+faker.random().nextInt(1,99999)+"@testarmy.com");
+        sendKeysToVisibleElement(createEmailInput, "jaroslaw.kotus+" + faker.random().nextInt(1, 99999) + "@testarmy.com");
         return this;
     }
 
-    private LoginPage clickCreateAccountButton(){
+    private LoginPage clickCreateAccountButton() {
         clickVisibleElement(createAccountBtn);
         return this;
     }
-    public LoginPage goToRegistrationForm(){
+
+    public LoginPage goToRegistrationForm() {
         insertEmailCreate();
         clickCreateAccountButton();
+        return this;
+    }
+    public LoginPage insertAccountCredentials(){
+        sendKeysToVisibleElement(loginEmailInput, LOGIN);
+        sendKeysToVisibleElement(passwordEmailInput, PASSWORD);
+        return this;
+    }
+    public LoginPage clickSubmitBtn(){
+        clickVisibleElement(signInButton);
         return this;
     }
 }

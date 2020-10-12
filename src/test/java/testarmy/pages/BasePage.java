@@ -39,7 +39,7 @@ public class BasePage {
         return this;
     }
 
-    protected BasePage sendKeysToVisivleElement(WebElement element, String inputText) {
+    protected BasePage sendKeysToVisibleElement(WebElement element, String inputText) {
         waitForElement(element);
         sendKeysToElement(element, inputText);
         return this;

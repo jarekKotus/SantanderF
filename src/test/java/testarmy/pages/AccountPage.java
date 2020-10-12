@@ -15,6 +15,9 @@ public class AccountPage extends BasePage {
     @FindBy(css = "p.info-account")
     WebElement welcomeLabel;
 
+    @FindBy(css = "#contact-link")
+    WebElement contactBtn;
+
     @Autowired
     public AccountPage(DriverProvider driverProvider) {
         super(driverProvider);
@@ -23,6 +26,11 @@ public class AccountPage extends BasePage {
     public void assertThatAccountPageIsDisplayed(String expectedText) {
         waitForElement(welcomeLabel);
         Assertions.assertEquals(welcomeLabel.getText(), expectedText, "Incorrect expected text");
+    }
+
+    public AccountPage clickContactBtn(){
+        clickVisibleElement(contactBtn);
+        return this;
     }
 
 }
