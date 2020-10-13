@@ -1,4 +1,4 @@
-package utils;
+package testarmy.utils;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -13,7 +13,7 @@ public class PropertyService {
     private Properties appProps;
 
     public PropertyService() {
-        File file = new File("src/resources");
+        File file = new File("src/test/resources");
         rootPath = file.getAbsolutePath();
         appConfigPath = rootPath + "/app.properties";
         appProps = new Properties();

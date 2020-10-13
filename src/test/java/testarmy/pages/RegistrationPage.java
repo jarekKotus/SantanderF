@@ -1,15 +1,16 @@
-package Pages;
+package testarmy.pages;
 
 import com.github.javafaker.Faker;
-import cucumber.api.java.eo.Se;
+import io.cucumber.spring.ScenarioScope;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
+import org.springframework.stereotype.Component;
+import testarmy.utils.DriverProvider;
 
-import static Data.TestData.BASEURL;
-
+@Component
+@ScenarioScope
 public class RegistrationPage extends BasePage {
-
 
     @FindBy(css = "#id_gender1")
     WebElement mrGender;
@@ -58,8 +59,8 @@ public class RegistrationPage extends BasePage {
 
     Faker faker = new Faker();
 
-    public RegistrationPage() {
-        super();
+    public RegistrationPage(DriverProvider driverProvider) {
+        super(driverProvider);
     }
 
     public RegistrationPage fillUpRegistrationFrom() {
@@ -78,12 +79,12 @@ public class RegistrationPage extends BasePage {
     }
 
     private void setFirstAndLastName() {
-        sendKeysToVisivleElement(firstNameInput, faker.name().firstName());
-        sendKeysToVisivleElement(lastNameInput, faker.name().lastName());
+        sendKeysToVisibleElement(firstNameInput, faker.name().firstName());
+        sendKeysToVisibleElement(lastNameInput, faker.name().lastName());
     }
 
     private void setPassword() {
-        sendKeysToVisivleElement(passwordInput, "12345");
+        sendKeysToVisibleElement(passwordInput, "12345");
     }
 
     private void setDateOfBirth() {
@@ -96,21 +97,21 @@ public class RegistrationPage extends BasePage {
     }
 
     private void setAddresse() {
-        sendKeysToVisivleElement(addressInput, faker.address().streetAddress());
-        sendKeysToVisivleElement(cityInput, faker.address().city());
+        sendKeysToVisibleElement(addressInput, faker.address().streetAddress());
+        sendKeysToVisibleElement(cityInput, faker.address().city());
         Select stateSelect = new Select(stateSelectElement);
         stateSelect.selectByVisibleText("Alaska");
-        sendKeysToVisivleElement(zipCodeInput, faker.address().zipCode().substring(0, 5));
+        sendKeysToVisibleElement(zipCodeInput, faker.address().zipCode().substring(0, 5));
         Select countrySelect = new Select(countrySelectElement);
         countrySelect.selectByVisibleText("United States");
     }
 
     private void setMobilePhone() {
-        sendKeysToVisivleElement(mobilePhoneInput, faker.phoneNumber().subscriberNumber(14));
+        sendKeysToVisibleElement(mobilePhoneInput, faker.phoneNumber().subscriberNumber(14));
     }
 
     private void setalias() {
-        sendKeysToVisivleElement(aliasInput, faker.name().username());
+        sendKeysToVisibleElement(aliasInput, faker.name().username());
     }
 
     public void clickRegisterButton(){
